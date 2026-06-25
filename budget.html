@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TripNest budget calculator with smart travel cost categories, totals, and visual charts.">
+    <title>Budget Calculator | TripNest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <nav class="navbar" aria-label="Primary navigation">
+        <a class="logo" href="index.html"><i class="fa-solid fa-plane-departure"></i>TripNest</a>
+        <button class="icon-btn menu-toggle" type="button" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="planner.html">AI Planner</a></li>
+            <li><a href="budget.html" class="active">Budget</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="pages/dashboard.html">Dashboard</a></li>
+        </ul>
+        <div class="nav-actions"><a href="pages/login.html" class="login-btn">Login</a></div>
+    </nav>
+
+    <main>
+        <section class="page-hero">
+            <div class="shell" data-animate>
+                <span class="hero-tag"><i class="fa-solid fa-chart-pie"></i>Smart calculator</span>
+                <h1>Plan every rupee before you fly</h1>
+                <p>Estimate flights, hotels, food, local transport, activities, shopping, and emergency buffers with visual budget charts.</p>
+            </div>
+        </section>
+
+        <section class="form-section shell">
+            <form class="trip-form" id="budgetForm" data-animate>
+                <label>Flights<input type="number" id="flights" min="0" value="30000"></label>
+                <label>Hotel<input type="number" id="hotel" min="0" value="25000"></label>
+                <label>Food<input type="number" id="food" min="0" value="12000"></label>
+                <label>Local transport<input type="number" id="transport" min="0" value="8000"></label>
+                <label>Activities<input type="number" id="activities" min="0" value="10000"></label>
+                <label>Shopping<input type="number" id="shopping" min="0" value="7000"></label>
+                <label>Emergency fund<input type="number" id="emergency" min="0" value="10000"></label>
+                <button type="submit" class="btn">Calculate budget</button>
+            </form>
+
+            <section class="result-card" id="budgetResult" data-animate>
+                <h2>Total estimate</h2>
+                <p class="muted">Adjust the categories to calculate a realistic trip budget.</p>
+                <div id="budgetChart" class="budget-chart"></div>
+            </section>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="shell footer-bottom"><p>&copy; 2026 TripNest.</p><p>Smart travel budget planner.</p></div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

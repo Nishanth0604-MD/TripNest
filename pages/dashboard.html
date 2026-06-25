@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TripNest dashboard for saved trips, upcoming trips, favorites, statistics, and budget history.">
+    <title>Dashboard | TripNest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <nav class="navbar" aria-label="Primary navigation">
+        <a class="logo" href="../index.html"><i class="fa-solid fa-plane-departure"></i>TripNest</a>
+        <button class="icon-btn menu-toggle" type="button" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../destinations.html">Destinations</a></li>
+            <li><a href="../planner.html">AI Planner</a></li>
+            <li><a href="../budget.html">Budget</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        </ul>
+        <div class="nav-actions"><a href="profile.html" class="login-btn">Profile</a></div>
+    </nav>
+
+    <main>
+        <section class="page-hero">
+            <div class="shell" data-animate>
+                <span class="hero-tag"><i class="fa-solid fa-gauge-high"></i>Traveler dashboard</span>
+                <h1>Your trips, budgets, and favorites</h1>
+                <p>A SaaS-style dashboard ready to connect with real user data later.</p>
+            </div>
+        </section>
+
+        <section class="dashboard-layout shell">
+            <aside class="sidebar" data-animate>
+                <div class="profile-mini"><span id="dashboardInitials">TN</span><div><h3 id="dashboardName">TripNest User</h3><p class="muted">Premium traveler</p></div></div>
+                <nav>
+                    <a class="active" href="dashboard.html">Overview</a>
+                    <a href="profile.html">Profile</a>
+                    <a href="../destinations.html">Favorites</a>
+                    <a href="../planner.html">Create trip</a>
+                </nav>
+            </aside>
+            <div class="dashboard-main">
+                <div class="stats-grid" id="statsGrid" data-animate></div>
+                <section class="dashboard-card" data-animate><h3>Upcoming trips</h3><ul class="trip-list" id="upcomingTrips"></ul></section>
+                <section class="dashboard-card" data-animate><h3>Favorite destinations</h3><div class="grid grid-3" id="favoriteDestinations"></div></section>
+                <section class="dashboard-card" data-animate><h3>Budget history</h3><ul class="budget-history" id="budgetHistory"></ul></section>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/app.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/animations.js"></script>
+</body>
+</html>

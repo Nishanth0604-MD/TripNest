@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generate dynamic TripNest itineraries with AI-ready prompts, weather forecasts, and destination maps.">
+    <title>AI Trip Planner | TripNest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/planner.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <nav class="navbar" aria-label="Primary navigation">
+        <a class="logo" href="index.html"><i class="fa-solid fa-plane-departure"></i>TripNest</a>
+        <button class="icon-btn menu-toggle" type="button" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="planner.html" class="active">AI Planner</a></li>
+            <li><a href="budget.html">Budget</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="pages/dashboard.html">Dashboard</a></li>
+        </ul>
+        <div class="nav-actions"><a href="pages/login.html" class="login-btn">Login</a></div>
+    </nav>
+
+    <main>
+        <section class="page-hero">
+            <div class="shell" data-animate>
+                <span class="hero-tag"><i class="fa-solid fa-wand-magic-sparkles"></i>AI trip planner</span>
+                <h1>Generate an itinerary in seconds</h1>
+                <p>Client-side itinerary generation today, clean API hooks for AI services tomorrow.</p>
+            </div>
+        </section>
+
+        <section class="planner-layout shell">
+            <div class="planner-stack">
+                <form class="trip-form" id="tripForm" data-animate>
+                    <label>Destination<input type="text" id="destination" placeholder="e.g., Tokyo" required></label>
+                    <label>Start date<input type="date" id="startDate" required></label>
+                    <label>End date<input type="date" id="endDate" required></label>
+                    <label>Travelers<input type="number" id="travelers" min="1" max="20" value="2" required></label>
+                    <label>Budget<input type="number" id="budget" min="0" placeholder="100000" required></label>
+                    <label>Travel style
+                        <select id="style" required>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Budget">Budget</option>
+                            <option value="Family">Family</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Solo">Solo</option>
+                        </select>
+                    </label>
+                    <button type="submit" class="btn">Generate itinerary</button>
+                </form>
+
+                <section class="weather-panel" data-animate>
+                    <h2>Weather forecast</h2>
+                    <p class="muted">Uses a public weather API and can be swapped for another provider later.</p>
+                    <form class="ai-prompt" id="weatherForm">
+                        <label class="field">City<input id="weatherCity" type="text" placeholder="Tokyo" required></label>
+                        <button class="btn-soft" type="submit">Check weather</button>
+                    </form>
+                    <div id="weatherResult"></div>
+                </section>
+            </div>
+
+            <div class="planner-stack">
+                <section class="result-card" id="planResult" data-animate>
+                    <h2>Your itinerary will appear here</h2>
+                    <p class="muted">Add your trip details and TripNest will generate a dynamic day-by-day plan.</p>
+                </section>
+
+                <section class="ai-panel" data-animate>
+                    <h2>AI itinerary section</h2>
+                    <p class="muted">This prompt builder is intentionally modular so an OpenAI, Firebase Function, or Supabase Edge Function can be connected later.</p>
+                    <div class="ai-prompt">
+                        <label class="field">Prompt focus
+                            <select id="promptFocus">
+                                <option value="balanced">Balanced trip</option>
+                                <option value="food">Food and culture</option>
+                                <option value="hidden">Hidden gems</option>
+                                <option value="family">Family friendly</option>
+                            </select>
+                        </label>
+                        <div class="prompt-preview" id="promptPreview">Your AI prompt will update after you generate an itinerary.</div>
+                        <button class="btn-soft" id="aiPreviewBtn" type="button">Simulate AI response</button>
+                    </div>
+                    <div class="ai-response" id="aiResponse">AI response placeholder: connect your future itinerary API here.</div>
+                </section>
+
+                <section class="map-panel" data-animate>
+                    <h2>Destination map</h2>
+                    <p class="muted">Nearby attractions, hotels, restaurants, and directions-ready markers.</p>
+                    <div class="map-tools">
+                        <button class="btn-soft active" data-map-category="attraction" type="button">Attractions</button>
+                        <button class="btn-soft" data-map-category="hotel" type="button">Hotels</button>
+                        <button class="btn-soft" data-map-category="restaurant" type="button">Restaurants</button>
+                    </div>
+                    <div id="plannerMap" class="map-frame"></div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="shell footer-bottom"><p>&copy; 2026 TripNest.</p><p>AI-ready itinerary architecture.</p></div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/planner.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

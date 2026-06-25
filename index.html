@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TripNest is an AI-ready travel planning platform for destinations, itineraries, budgets, weather, maps, and saved trips.">
+    <title>TripNest | AI-Powered Travel Planning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <nav class="navbar" aria-label="Primary navigation">
+        <a class="logo" href="index.html"><i class="fa-solid fa-plane-departure"></i>TripNest</a>
+        <button class="icon-btn menu-toggle" type="button" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="planner.html">AI Planner</a></li>
+            <li><a href="budget.html">Budget</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="pages/dashboard.html">Dashboard</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="pages/login.html" class="login-btn">Login</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="shell">
+            <div class="hero-content" data-animate>
+                <span class="hero-tag"><i class="fa-solid fa-wand-magic-sparkles"></i>AI-ready travel planning</span>
+                <h1>Plan smarter trips with <span>TripNest.</span></h1>
+                <p>Discover stays, experiences, weather, maps, budgets, and personalized itinerary ideas from one polished travel workspace.</p>
+
+                <div class="hero-search" role="search" aria-label="Advanced destination search">
+                    <label class="search-field">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <input id="heroDestination" type="search" placeholder="Where to? Bali, Paris, Tokyo">
+                    </label>
+                    <label class="search-field">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <input id="heroDate" type="date">
+                    </label>
+                    <label class="search-field">
+                        <i class="fa-solid fa-compass"></i>
+                        <select id="heroStyle">
+                            <option value="">Any style</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Budget">Budget</option>
+                            <option value="Family">Family</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Solo">Solo</option>
+                        </select>
+                    </label>
+                    <button class="btn" id="heroSearchBtn" type="button">Search</button>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="planner.html" class="btn">Generate itinerary</a>
+                    <a href="destinations.html" class="btn-outline">Explore destinations</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <h2>120+</h2>
+                        <p>Countries indexed</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>18K</h2>
+                        <p>Trips planned</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2>4.9</h2>
+                        <p>Traveler rating</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-panel" aria-hidden="true" data-animate>
+                <div class="hero-card main">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1100&q=80" alt="">
+                </div>
+                <div class="hero-card floating">
+                    <div class="mini-row">
+                        <span class="pill"><i class="fa-solid fa-route"></i>5-day Bali plan</span>
+                        <span class="rating">4.9</span>
+                    </div>
+                    <h3>Beach mornings, temple sunsets, and cafe routes.</h3>
+                    <div class="mini-row">
+                        <div class="avatar-stack"><span>N</span><span>A</span><span>R</span></div>
+                        <strong>Rs. 45K est.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-pad surface">
+            <div class="shell">
+                <div class="section-title" data-animate>
+                    <span class="eyebrow">Featured stays and escapes</span>
+                    <h2>Featured destinations</h2>
+                    <p>Curated city breaks, beach retreats, and culture-rich adventures for your next plan.</p>
+                </div>
+                <div class="grid grid-3" id="homeDestinations" data-animate></div>
+            </div>
+        </section>
+
+        <section class="section-pad soft-section">
+            <div class="shell">
+                <div class="section-title" data-animate>
+                    <span class="eyebrow">Popular experiences</span>
+                    <h2>Book the vibe, not just the place</h2>
+                    <p>TripNest helps travelers match the destination with the experience they actually want.</p>
+                </div>
+                <div class="grid grid-4">
+                    <article class="experience-card" data-animate>
+                        <span class="icon-chip"><i class="fa-solid fa-mountain-sun"></i></span>
+                        <h3>Mountain escapes</h3>
+                        <p>Scenic routes, sunrise hikes, cabin stays, and cool-weather planning.</p>
+                    </article>
+                    <article class="experience-card" data-animate>
+                        <span class="icon-chip"><i class="fa-solid fa-umbrella-beach"></i></span>
+                        <h3>Beach holidays</h3>
+                        <p>Resorts, island hopping, sunset spots, and relaxed day-by-day itineraries.</p>
+                    </article>
+                    <article class="experience-card" data-animate>
+                        <span class="icon-chip"><i class="fa-solid fa-utensils"></i></span>
+                        <h3>Food trails</h3>
+                        <p>Local markets, chef-led experiences, cafes, and neighborhood gems.</p>
+                    </article>
+                    <article class="experience-card" data-animate>
+                        <span class="icon-chip"><i class="fa-solid fa-landmark"></i></span>
+                        <h3>Culture trips</h3>
+                        <p>Museums, heritage walks, festivals, and historic districts in one plan.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-pad surface">
+            <div class="shell">
+                <div class="section-title" data-animate>
+                    <span class="eyebrow">Platform features</span>
+                    <h2>Everything a travel SaaS needs</h2>
+                    <p>Built as a professional portfolio-ready foundation for future AI, Firebase, Supabase, maps, and booking integrations.</p>
+                </div>
+                <div class="grid grid-4">
+                    <article class="feature-card" data-animate><span class="icon-chip"><i class="fa-solid fa-wand-magic-sparkles"></i></span><h3>AI planner ready</h3><p>Prompt builder and placeholder response flow designed for API integration.</p></article>
+                    <article class="feature-card" data-animate><span class="icon-chip"><i class="fa-solid fa-cloud-sun"></i></span><h3>Weather insights</h3><p>Open weather service integration for current conditions and 5-day forecasts.</p></article>
+                    <article class="feature-card" data-animate><span class="icon-chip"><i class="fa-solid fa-map-location-dot"></i></span><h3>Maps and nearby</h3><p>Leaflet maps with attractions, hotels, restaurants, and directions placeholders.</p></article>
+                    <article class="feature-card" data-animate><span class="icon-chip"><i class="fa-solid fa-chart-pie"></i></span><h3>Budget charts</h3><p>Smart cost breakdowns for flights, stays, food, transport, shopping, and buffers.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-pad soft-section">
+            <div class="shell">
+                <div class="section-title" data-animate>
+                    <span class="eyebrow">Traveler stories</span>
+                    <h2>Designed for confident planning</h2>
+                </div>
+                <div class="grid grid-3">
+                    <article class="testimonial-card" data-animate><p>"TripNest made our Japan route feel organized without making it boring. The budget view was the clincher."</p><h3>Aria M.</h3><span class="muted">Family traveler</span></article>
+                    <article class="testimonial-card" data-animate><p>"The itinerary generator gave me a strong first draft, then I customized it in minutes."</p><h3>Kabir S.</h3><span class="muted">Solo traveler</span></article>
+                    <article class="testimonial-card" data-animate><p>"It feels like a modern booking product, but focused on planning the whole trip."</p><h3>Maya R.</h3><span class="muted">Adventure planner</span></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-pad surface">
+            <div class="shell">
+                <div class="section-title" data-animate>
+                    <span class="eyebrow">Trusted by teams and travelers</span>
+                    <h2>Ready for real travel workflows</h2>
+                </div>
+                <div class="logo-cloud" data-animate>
+                    <div class="trusted-item">Nomadly</div>
+                    <div class="trusted-item">Skyhub</div>
+                    <div class="trusted-item">Staygrid</div>
+                    <div class="trusted-item">RouteIQ</div>
+                    <div class="trusted-item">Maplane</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-pad">
+            <div class="shell">
+                <div class="newsletter" data-animate>
+                    <span class="hero-tag">Travel intelligence in your inbox</span>
+                    <h2>Get destination drops, budget tips, and itinerary ideas.</h2>
+                    <form id="newsletterForm">
+                        <label class="sr-only" for="newsletterEmail">Email</label>
+                        <input id="newsletterEmail" type="email" placeholder="you@example.com" required>
+                        <button class="btn" type="submit">Subscribe</button>
+                    </form>
+                    <p id="newsletterMessage" class="muted" aria-live="polite"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="shell footer-grid">
+            <div>
+                <h3>TripNest</h3>
+                <p>AI-ready travel planning for destinations, budgets, weather, maps, and saved trips.</p>
+            </div>
+            <div><h4>Product</h4><ul><li><a href="destinations.html">Destinations</a></li><li><a href="planner.html">AI Planner</a></li><li><a href="budget.html">Budget</a></li></ul></div>
+            <div><h4>Account</h4><ul><li><a href="pages/login.html">Login</a></li><li><a href="pages/signup.html">Signup</a></li><li><a href="pages/dashboard.html">Dashboard</a></li></ul></div>
+            <div><h4>Company</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="pages/profile.html">Profile</a></li><li><a href="pages/forgot-password.html">Reset password</a></li></ul></div>
+        </div>
+        <div class="shell footer-bottom">
+            <p>&copy; 2026 TripNest. Designed by Nishanth.</p>
+            <p>Portfolio-ready SaaS travel platform.</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

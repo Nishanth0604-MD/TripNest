@@ -1,0 +1,64 @@
+.explorer{
+    padding:80px 0;
+}
+
+.filter-panel{
+    display:grid;
+    grid-template-columns:2fr repeat(3,1fr);
+    gap:14px;
+    padding:18px;
+    margin-bottom:28px;
+    border:1px solid var(--line);
+    border-radius:26px;
+    background:rgba(255,255,255,.8);
+    box-shadow:var(--shadow-soft);
+    backdrop-filter:blur(16px);
+}
+
+.filter-panel .field{
+    gap:6px;
+}
+
+.filter-panel label{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.destination-summary{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:22px;
+}
+
+.wishlist-count{
+    color:var(--brand-dark);
+    font-weight:800;
+}
+
+.modal-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin:20px 0;
+}
+
+.modal-grid div{
+    padding:14px;
+    border-radius:16px;
+    background:#f8fbff;
+}
+
+@media (max-width: 900px){
+    .filter-panel{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media (max-width: 580px){
+    .filter-panel,
+    .modal-grid{
+        grid-template-columns:1fr;
+    }
+}
