@@ -70,6 +70,20 @@
                     <p class="wishlist-count"><i class="fa-solid fa-heart"></i> <span id="wishlistCount">0</span> saved</p>
                 </div>
 
+                <div class="sort-controls" data-animate style="display:flex; align-items:center; gap:12px; margin-bottom:24px;">
+                    <label style="display:flex; align-items:center; gap:8px; color:var(--muted); font-weight:700;">
+                        <i class="fa-solid fa-arrow-up-down"></i>
+                        Sort by
+                        <select id="sortBy" style="min-height:40px; padding:0 10px; border:1px solid var(--line); border-radius:10px; background:#f8fbff; color:var(--ink);">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="name">Name A-Z</option>
+                        </select>
+                    </label>
+                </div>
+
                 <div class="grid grid-3" id="destinationGrid" data-animate></div>
             </div>
         </section>
