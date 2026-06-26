@@ -2,11 +2,27 @@ const tripForm = document.querySelector("#tripForm");
 let currentPrompt = "";
 
 const itineraryIdeas = {
-    Luxury:["Private transfer and landmark check-in","Fine dining reservation and spa time","Boutique shopping with rooftop drinks","Scenic day trip with premium guide"],
-    Budget:["Free walking tour and local market","Public transport route with street food stops","Museum pass and sunset viewpoint","Affordable neighborhood cafe crawl"],
-    Family:["Easy landmark visit and park break","Interactive museum and early dinner","Low-stress day trip with snack stops","Photo-friendly activity and relaxed evening"],
-    Adventure:["Outdoor activity and hidden viewpoint","Trail or bike route with local lunch","Water sport or climbing session","Night market and live local scene"],
-    Solo:["Cafe planning session and city walk","Museum, bookstore, and food lane","Small-group experience and sunset spot","Flexible day trip with journaling time"]
+    Luxury:["Private transfer and 5-star landmark check-in","Michelin-rated fine dining and spa wellness","Boutique designer shopping with rooftop cocktails","Scenic private tour with premium local guide"],
+    Budget:["Free walking tour and vibrant local market","Public metro route with street food adventures","Museum pass and scenic sunset viewpoint","Affordable neighborhood cafe crawl and bookstores"],
+    Family:["Easy landmark visit with kid-friendly breaks","Interactive hands-on museum and early dinner","Low-stress day trip with snack stops throughout","Photo-friendly activity and relaxed evening play"],
+    Adventure:["Thrilling outdoor activity and hidden viewpoint","Mountain trail or bike route with local lunch","Water sport, rock climbing, or extreme session","Night market exploration and live local music scene"],
+    Solo:["Solo cafe planning session and city walk","Museum, independent bookstore, and food lane","Small-group experience and peaceful sunset spot","Flexible day trip with journaling and reflection time"]
+};
+
+const mealIdeas = {
+    Luxury:["Fine dining with seasonal tasting menu","Michelin-starred restaurant reservation","Private chef experience","Rooftop restaurant with city views"],
+    Budget:["Street food market exploration","Local family-run restaurant","Food court with regional specialties","Market-to-table casual dining"],
+    Family:["Pizza or noodles at family-friendly spot","Theme park or casual restaurant","Kids menu with healthy options","Rooftop or riverside casual eatery"],
+    Adventure:["Adventure guide cafe or mountain lodge","Local hikers' favorite spot","Authentic regional cuisine","Beachside or nature-themed restaurant"],
+    Solo:["Cozy cafe with work-friendly vibes","Solo traveler-friendly group dining","Cooking class or food tour","Street food discovery walk"]
+};
+
+const eveningActivities = {
+    Luxury:["Theater or opera performance","Wine tasting at historic venue","Evening yacht or sunset cruise","Upscale nightclub or lounge"],
+    Budget:["Live music at local venue","Night market exploration","Walking tour of lit-up neighborhoods","Local pub or casual bar"],
+    Family:["Night market and light show","Family-friendly cultural performance","Sunset picnic and stargazing","Recreational sports or family games"],
+    Adventure:["Night hiking or stargazing adventure","Live music at adventure bar","Bonfire on beach or in nature","Nighttime water sports or activity"],
+    Solo:["Live music or comedy show","Solo-friendly bar or cafe","Night photography walk","Reflective sunset or evening journaling"]
 };
 
 function dayCount(startDate, endDate){
@@ -23,21 +39,37 @@ function buildPrompt(data){
 
 function renderPlan(data){
     const ideas = itineraryIdeas[data.style] || itineraryIdeas.Adventure;
+    const meals = mealIdeas[data.style] || mealIdeas.Adventure;
+    const evenings = eveningActivities[data.style] || eveningActivities.Adventure;
     const dailyBudget = Math.round(data.budget / data.days);
+    
     const items = Array.from({ length:data.days }, (_, index) => {
+        const dayNum = index + 1;
         const idea = ideas[index % ideas.length];
+        const meal = meals[index % meals.length];
+        const evening = evenings[index % evenings.length];
+        const morningTime = `${7 + (index % 3)}:00 AM`;
+        const morningActivity = idea.split(" and ")[0];
+        const afternoonActivity = idea.split(" and ")[1] || "Explore and relax";
+        
         return `
             <li>
-                <strong>Day ${index + 1}: ${idea}</strong><br>
-                Morning: explore a signature area in ${data.destination}. Afternoon: add one bookable experience. Evening: choose food and a viewpoint that fits ${data.style.toLowerCase()} travel.<br>
-                Estimated daily spend: ${TripNest.formatMoney(dailyBudget)}
+                <strong>Day ${dayNum}: ${idea}</strong>
+                <div style="margin-top:10px; padding-top:10px; border-top:1px solid #dbe7f3;">
+                    <p><strong>Morning (${morningTime}):</strong> ${morningActivity} in ${data.destination}. Start your day with coffee or tea at a local spot.</p>
+                    <p><strong>Lunch:</strong> ${meal}</p>
+                    <p><strong>Afternoon:</strong> ${afternoonActivity}. Take time to explore, photograph, and experience the local culture.</p>
+                    <p><strong>Evening:</strong> ${evening}</p>
+                    <p><strong>Daily budget estimate:</strong> ${TripNest.formatMoney(dailyBudget)}</p>
+                </div>
             </li>
         `;
     }).join("");
 
     document.querySelector("#planResult").innerHTML = `
         <h2>${data.days}-day ${data.destination} itinerary</h2>
-        <p class="muted">${data.travelers} traveler(s), ${data.style} style, ${TripNest.formatMoney(data.budget)} budget.</p>
+        <p class="muted">${data.travelers} traveler(s) • ${data.style} style • ${TripNest.formatMoney(data.budget)} budget</p>
+        <p style="margin-top:8px; color:#0ea5e9; font-size:14px;"><strong>💡 Tip:</strong> This is a suggested itinerary. Adjust timing, meals, and activities based on your preferences and local availability.</p>
         <ul class="itinerary-list">${items}</ul>
     `;
 }

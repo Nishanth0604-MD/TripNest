@@ -25,22 +25,38 @@ function renderDashboard(){
         </article>
     `).join("");
 
-    document.querySelector("#upcomingTrips").innerHTML = [
-        ["Goa recharge","Jul 12 - Jul 16"],
-        ["Tokyo culture sprint","Sep 3 - Sep 10"],
-        ["Swiss Alps escape","Dec 18 - Dec 24"]
-    ].map(([name,date]) => `<li><span>${name}</span><strong>${date}</strong></li>`).join("");
+    // Enhanced upcoming trips with more details
+    const upcomingTripsData = [
+        { name:"Goa beach recharge", date:"Jul 12 - Jul 16", status:"Confirmed", color:"var(--accent)" },
+        { name:"Tokyo culture sprint", date:"Sep 3 - Sep 10", status:"Planned", color:"var(--brand)" },
+        { name:"Swiss Alps escape", date:"Dec 18 - Dec 24", status:"Wishlist", color:"var(--sun)" }
+    ];
+    
+    document.querySelector("#upcomingTrips").innerHTML = upcomingTripsData.map(({name,date,status,color}) => `
+        <li>
+            <span>
+                <strong>${name}</strong>
+                <p class="muted" style="font-size:12px; margin-top:4px;">${date}</p>
+            </span>
+            <span style="background:${color}; color:#ffffff; padding:6px 12px; border-radius:999px; font-size:12px; font-weight:700;">${status}</span>
+        </li>
+    `).join("");
 
     document.querySelector("#favoriteDestinations").innerHTML = favoriteDestinations.length
         ? favoriteDestinations.map((item) => TripNest.destinationCard(item, { details:false })).join("")
-        : `<div class="empty-state">No favorites yet. Save destinations from the explorer.</div>`;
+        : `<div class="empty-state" style="grid-column:1/-1;">No favorites yet. <a href="../destinations.html" style="color:var(--brand); font-weight:700;">Explore destinations</a> and save your favorites.</div>`;
 
     const budgetItems = lastBudget?.values || [
         { label:"Flights", value:30000 },
         { label:"Hotel", value:25000 },
         { label:"Food", value:12000 }
     ];
-    document.querySelector("#budgetHistory").innerHTML = budgetItems.map((item) => `<li><span>${item.label}</span><strong>${TripNest.formatMoney(item.value)}</strong></li>`).join("");
+    document.querySelector("#budgetHistory").innerHTML = budgetItems.map((item) => `
+        <li>
+            <span><strong>${item.label}</strong></span>
+            <strong style="color:var(--brand-dark);">${TripNest.formatMoney(item.value)}</strong>
+        </li>
+    `).join("");
 }
 
 document.addEventListener("DOMContentLoaded", renderDashboard);

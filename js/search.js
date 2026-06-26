@@ -33,13 +33,32 @@ function matchesFilters(destination){
         (!maxPrice || destination.price <= maxPrice);
 }
 
+function sortDestinations(destinations){
+    const sortBy = document.querySelector("#sortBy")?.value || "featured";
+    const copy = [...destinations];
+    
+    switch(sortBy){
+        case "price-low":
+            return copy.sort((a, b) => a.price - b.price);
+        case "price-high":
+            return copy.sort((a, b) => b.price - a.price);
+        case "rating":
+            return copy.sort((a, b) => b.rating - a.rating);
+        case "name":
+            return copy.sort((a, b) => a.name.localeCompare(b.name));
+        default:
+            return copy;
+    }
+}
+
 function renderDestinations(){
     if (!destinationGrid){
         return;
     }
 
-    const results = TripNest.destinations.filter(matchesFilters);
-    destinationGrid.innerHTML = results.length ? results.map((item) => TripNest.destinationCard(item)).join("") : `<div class="empty-state">No destinations match those filters yet.</div>`;
+    let results = TripNest.destinations.filter(matchesFilters);
+    results = sortDestinations(results);
+    destinationGrid.innerHTML = results.length ? results.map((item) => TripNest.destinationCard(item)).join("") : `<div class="empty-state"><i class="fa-solid fa-binoculars" style="font-size:32px; color:#dbe7f3; margin-bottom:12px; display:block;"></i>No destinations match those filters. Try adjusting your search.</div>`;
     document.querySelector("#resultCount").textContent = results.length;
     updateWishlistCount();
 }
@@ -66,7 +85,7 @@ function openDestinationModal(id){
     }
 
     modalContent.innerHTML = `
-        <div class="modal-image"><img src="${destination.image}" alt="${destination.name}, ${destination.country}"></div>
+        <div class="modal-image"><img src="${destination.image}" alt="${destination.name}, ${destination.country}" loading="lazy" decoding="async"></div>
         <div class="modal-body">
             <span class="eyebrow">${destination.category} escape</span>
             <h2 id="modalTitle">${destination.name}, ${destination.country}</h2>
@@ -140,6 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     filters?.addEventListener("input", renderDestinations);
     filters?.addEventListener("change", renderDestinations);
+    
+    // Sort control listener
+    document.querySelector("#sortBy")?.addEventListener("change", renderDestinations);
 
     document.addEventListener("click", (event) => {
         const favorite = event.target.closest("[data-favorite]");
