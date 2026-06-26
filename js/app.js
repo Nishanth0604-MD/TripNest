@@ -103,7 +103,7 @@ TripNest.destinationCard = (destination, options = {}) => {
     return `
         <article class="destination-card" data-id="${destination.id}" data-animate>
             <div class="destination-image">
-                <img src="${destination.image}" alt="${destination.name}, ${destination.country}" loading="lazy">
+                <img src="${destination.image}" alt="${destination.name}, ${destination.country}" loading="lazy" decoding="async">
                 <div class="badge-row">
                     <span class="pill"><i class="fa-solid fa-star"></i>${destination.rating}</span>
                     <button class="favorite-btn ${isFavorite ? "active" : ""}" data-favorite="${destination.id}" type="button" aria-label="Save ${destination.name}">
@@ -155,8 +155,36 @@ TripNest.initHome = () => {
 
     document.querySelector("#newsletterForm")?.addEventListener("submit", (event) => {
         event.preventDefault();
-        event.target.reset();
-        document.querySelector("#newsletterMessage").textContent = "Subscribed. Your next travel idea is already warming up.";
+        const form = event.target;
+        const emailInput = form.querySelector("input[type='email']");
+        const button = form.querySelector("button");
+        const message = document.querySelector("#newsletterMessage");
+        
+        // Validation
+        if (!emailInput.value.trim()){
+            message.textContent = "Please enter a valid email address.";
+            message.style.color = "#ef4444";
+            return;
+        }
+        
+        // Show loading state
+        button.disabled = true;
+        button.textContent = "Subscribing...";
+        message.textContent = "";
+        
+        // Simulate API call
+        setTimeout(() => {
+            form.reset();
+            button.disabled = false;
+            button.textContent = "Subscribe";
+            message.textContent = "✓ Subscribed! Check your inbox for travel inspiration.";
+            message.style.color = "#14b8a6";
+            
+            // Clear message after 5 seconds
+            setTimeout(() => {
+                message.textContent = "";
+            }, 5000);
+        }, 800);
     });
 };
 
@@ -225,10 +253,49 @@ TripNest.initBudget = () => {
 };
 
 TripNest.initContact = () => {
-    document.querySelector("#contactForm")?.addEventListener("submit", (event) => {
+    const form = document.querySelector("#contactForm");
+    if (!form) return;
+    
+    form.addEventListener("submit", (event) => {
         event.preventDefault();
-        event.target.reset();
-        document.querySelector("#contactMessage").textContent = "Message received. TripNest will respond soon.";
+        const button = form.querySelector("button");
+        const message = document.querySelector("#contactMessage");
+        
+        // Get form values
+        const name = form.querySelector("#name").value.trim();
+        const email = form.querySelector("#email").value.trim();
+        const message_text = form.querySelector("#message").value.trim();
+        
+        // Validation
+        if (!name || !email || !message_text){
+            document.querySelector("#contactMessage").textContent = "Please fill in all fields.";
+            document.querySelector("#contactMessage").style.color = "#ef4444";
+            return;
+        }
+        
+        // Show loading state
+        button.disabled = true;
+        button.textContent = "Sending...";
+        message.textContent = "";
+        
+        // Simulate API call
+        setTimeout(() => {
+            form.reset();
+            button.disabled = false;
+            button.textContent = "Send message";
+            message.textContent = "✓ Message sent! We'll get back to you soon.";
+            message.style.color = "#14b8a6";
+            
+            // Store in localStorage for demo
+            const contacts = JSON.parse(localStorage.getItem("tripnest:contacts") || "[]");
+            contacts.push({ name, email, message: message_text, timestamp: new Date().toISOString() });
+            localStorage.setItem("tripnest:contacts", JSON.stringify(contacts));
+            
+            // Clear message after 5 seconds
+            setTimeout(() => {
+                message.textContent = "";
+            }, 5000);
+        }, 800);
     });
 };
 
